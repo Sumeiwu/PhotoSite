@@ -1,0 +1,28 @@
+<body style="background-color:lightgoldenrodyellow;">
+<h1 style = "color:palevioletred;">PhotoSite :)</h1>
+
+<h2><%= @users.first_name%> <%= @users.last_name%></h2>
+<% @photos.each do |photo| %>
+  <%= image_tag photo.file_name %>
+  <p>Photo Created on: <%= photo.date_time %></p>
+  <% @comments = photo.comments %>
+  <% if photo.comments.size > 0 %>
+    <% @comments.each do |comment| %>
+      <b style = "color:saddlebrown;">Commented</b>
+      <li>
+        <tr><%= comment.comment_text %></tr>
+        <br>
+        by
+        <%= hidden_field_tag @user = User.find(comment.user.id) %>
+        <%= link_to @user.first_name, {:action => "index", :id => @user.id} %> <%= @user.last_name %>
+        <%= comment.date_time %>
+      </li>
+      <hr>
+    <% end %>
+  <% else %>
+    <b style = "color:saddlebrown;">No Comment</b>
+    <hr>
+  <% end %>
+
+<% end %>
+</body>

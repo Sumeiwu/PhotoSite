@@ -1,0 +1,24 @@
+<body style="background-color:lightgoldenrodyellow;">
+
+<h1 style = "color:palevioletred;"> PhotoSite User List</h1>
+<% unless User.count !=0 %>
+  <p>There are no users!</p>
+<% else %>
+  <p> There are <%= User.count %> users. </p>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>First</th>
+      <th>Last</th>
+    </tr>
+    <% for user in @users %>
+      <tr>
+        <td><%=user.id %></td>
+        <td><%=link_to user.first_name,{:action =>"index", :controller =>"photos", :id => user.id} %></td>
+        <td><%= user.last_name %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+</body>
